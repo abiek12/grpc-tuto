@@ -1,0 +1,65 @@
+syntax = 'proto3';
+
+package auth;
+
+service UsersService {
+    rpc CreateUser(CreateUserDto) returns (CreateUserResponse);
+    rpc getAllUsers(Empty) returns (GetAllUsersResponse);
+    rpc getUserById(UserIdDto) returns (User);
+    rpc updateUser(UserUpdateDto) returns (User);
+    rpc deleteUser(UserIdDto) returns (Empty);
+}
+
+message CreateUserDto {
+    string username = 1;
+    string email = 2;
+    string password = 3;
+    string role = 4; // e.g., "admin", "user", etc.
+    int32 age = 5;
+}
+
+message UserIdDto {
+    string id = 1; // User ID to identify the user
+}
+
+message UserUpdateDto {
+    string id = 1; // User ID to identify the user
+    string username = 2;
+    string email = 3;
+    string password = 4;
+    string role = 5; // e.g., "admin", "user", etc.
+    int32 age = 6;
+    bool isActive = 7; // Indicates if the user account is active
+    SocialMedia socialMedia = 8; // Optional social media links
+}
+
+message CreateUserResponse {
+    User user = 1;
+    string message = 2; // e.g., "User created successfully"
+}
+
+message Empty {}
+
+message GetAllUsersResponse {
+    repeated User users = 1; // List of all users
+    string message = 2; // e.g., "Users retrieved successfully"
+}
+
+message User {
+    string id = 1;
+    string username = 2;
+    string email = 3;
+    string password = 4;
+    string role = 5; // e.g., "admin", "user", etc.
+    int32 age = 6;
+    bool isActive = 7; // Indicates if the user account is active
+    SocialMedia socialMedia = 8; // Optional social media links
+}
+
+message SocialMedia {
+    optional string facebook = 1;
+    optional string twitter = 2;
+    optional string instagram = 3;
+    optional string linkedin = 4;
+    optional string github = 5;
+}
