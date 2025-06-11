@@ -4,10 +4,16 @@ package auth;
 
 service UsersService {
     rpc CreateUser(CreateUserDto) returns (CreateUserResponse);
-    rpc getAllUsers(Empty) returns (GetAllUsersResponse);
-    rpc getUserById(UserIdDto) returns (User);
-    rpc updateUser(UserUpdateDto) returns (User);
-    rpc deleteUser(UserIdDto) returns (Empty);
+    rpc GetAllUsers(Empty) returns (GetAllUsersResponse);
+    rpc GetUserById(UserIdDto) returns (User);
+    rpc UpdateUser(UserUpdateDto) returns (User);
+    rpc DeleteUser(UserIdDto) returns (Empty);
+    rpc QueryUsers(stream PaginationDto) returns (stream User);
+}
+
+message PaginationDto {
+    int32 page = 1; // Page number for pagination
+    int32 limit = 2; // Number of items per page
 }
 
 message CreateUserDto {
